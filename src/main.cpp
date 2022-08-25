@@ -1,5 +1,5 @@
-#include "DEV_DimmableLamp.h"
 #include "HomeSpan.h"
+#include "DEV_SunriseLamp.h"
 
 void setup() {
     Serial.begin(115200);
@@ -8,12 +8,7 @@ void setup() {
     new SpanAccessory();
     new Service::AccessoryInformation();
         new Characteristic::Identify();
-    new DEV_DimmableLamp(12);
-
-    new SpanAccessory();
-    new Service::AccessoryInformation();
-        new Characteristic::Identify();
-    new DEV_DimmableLamp(14);
+    new DEV_SunriseLamp(14, 12);
 }
 
 void loop() { homeSpan.poll(); }
