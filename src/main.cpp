@@ -1,5 +1,6 @@
 #include "HomeSpan.h"
 #include "DEV_SunriseLamp.h"
+#include "DEV_SunriseAlarm.h"
 
 void setup() {
     Serial.begin(115200);
@@ -8,7 +9,9 @@ void setup() {
     new SpanAccessory();
     new Service::AccessoryInformation();
         new Characteristic::Identify();
-    new DEV_SunriseLamp(14, 12);
+
+    DEV_SunriseLamp *lamp = new DEV_SunriseLamp(14, 12);
+    new DEV_SunriseAlarm(lamp);
 }
 
 void loop() { homeSpan.poll(); }
