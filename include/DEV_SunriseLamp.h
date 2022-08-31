@@ -5,7 +5,7 @@
 #define COLOR_WARM 500
 
 #define BRIGHT_MAX 100
-#define BRIGHT_MIN 1
+#define BRIGHT_MIN 5
 
 #include "HomeSpan.h"
 #include "extras/PwmPin.h"
@@ -22,7 +22,7 @@ struct DEV_SunriseLamp: Service::LightBulb {
         this->state = new Characteristic::On();
 
         this->brightness = new Characteristic::Brightness(20);
-        this->brightness->setRange(BRIGHT_MIN, BRIGHT_MAX, 1);
+        this->brightness->setRange(BRIGHT_MIN, BRIGHT_MAX, 0.01);
 
         this->colorTemp = new Characteristic::ColorTemperature();
 
@@ -45,8 +45,9 @@ struct DEV_SunriseLamp: Service::LightBulb {
             this->brightness->setVal(brightness);
         }
 
-        float tempScalar = (float)(colorTemp - COLOR_COLD) / (COLOR_WARM - COLOR_COLD);
-        int power = state * brightness;
+        float tempScalar = (colorTemp - COLOR_COLD) / (COLOR_WARM - COLOR_COLD);
+        brightness = brightness / BRIGHT_MAX;
+        float power = state * brightness * brightness * 100;
 
         this->pinWarm->set(power * tempScalar);
         this->pinCold->set(power * abs(1 - tempScalar));
