@@ -37,10 +37,12 @@ struct DEV_Humidity: Service::HumiditySensor {
 };
 
 struct DEV_Climate {
+    TwoWire i2c;
     Adafruit_BME280 bme;
 
-    DEV_Climate() {
-        bool status = this->bme.begin(0x76);
+    DEV_Climate(int port_sda, int port_scl): i2c(0) {
+        this->i2c.begin(port_sda, port_scl);
+        bool status = this->bme.begin(0x76, &(this->i2c));
         if (!status) {
             LOG0("Could not find a valid BME280 sensor, check wiring!");
             while (1);
