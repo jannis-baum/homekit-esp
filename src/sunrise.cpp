@@ -3,6 +3,7 @@
 #include "DEV_SunriseAlarm.h"
 
 void setup() {
+    Serial.begin(115200);
     homeSpan.begin(Category::Lighting, "Sunrise Lamp");
 
     new SpanAccessory();
