@@ -8,8 +8,8 @@ void setup() {
     new SpanAccessory();
     new Service::AccessoryInformation();
         new Characteristic::Identify();
-    new DEV_LampRelay(19);
-    new DEV_LampRelay(18);
-    new DEV_LampRelay(5);
-    new DEV_LampRelay(17);
+    new DEV_LampRelay(19, false, true);
+    new DEV_LampRelay(18, false, true);
+    new DEV_LampRelay(5, false, true);
+    new DEV_LampRelay(17, false, true);
 }

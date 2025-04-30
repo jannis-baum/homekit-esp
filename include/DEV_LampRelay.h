@@ -7,18 +7,20 @@ struct DEV_LampRelay: Service::LightBulb {
     
     DEV_LampRelay(int pin, bool defaultOn = false, bool invert = false)
     : Service::LightBulb()
+    , relayPin(pin)
     , invert(invert) {
         this->state = new Characteristic::On(defaultOn);
-        this->relayPin = pin;
         pinMode(this->relayPin, OUTPUT);
-        digitalWrite(this->relayPin, 1);
+        this->write(defaultOn);
     }
     
     boolean update() {
-        digitalWrite(
-            this->relayPin,
-            this->invert ^ this->state->getNewVal()
-        );
+        this->write(this->state->getNewVal());
         return (true);
-    }  
+    }
+
+private:
+    void write(bool state) {
+        digitalWrite(this->relayPin, this->invert ^ state);
+    }
 };
