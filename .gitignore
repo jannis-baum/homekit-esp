@@ -3,3 +3,4 @@ compile_commands.json
 .cache
 .gcc-flags.json
 .ccls
+*.pdf
