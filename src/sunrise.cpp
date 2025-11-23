@@ -10,6 +10,6 @@ void setup() {
     new Service::AccessoryInformation();
         new Characteristic::Identify();
 
-    DEV_SunriseLamp *lamp = new DEV_SunriseLamp(14, 12);
+    DEV_SunriseLamp *lamp = new DEV_SunriseLamp(23, 22);
     new DEV_SunriseAlarm(lamp);
 }
