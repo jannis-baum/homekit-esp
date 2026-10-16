@@ -22,6 +22,12 @@ struct DEV_HydroponicsPump: Service::LightBulb {
     }
 
     void loop() {
+        // time gives uptime in seconds until NPT syncs, then seconds since UNIX
+        // epoch. the first pump will usually happen as soon as it syncs
+        // (initialized `last_pumped_interval` at 0 so syncing means it's now
+        // bigger) or if no sync happens for 15 minutes then it starts pumping by
+        // the uptime schedule and switches to time schedule with one extra pump
+        // as soon as it does sync
         time_t now = time(NULL);
         long current_interval = now / (PUMP_INTERVAL_MINUTES * 60);
 
