@@ -1,6 +1,6 @@
 #include "HomeSpan.h"
 
-#define PUMP_INTERVAL_MINUTES 15
+#define PUMP_INTERVAL_MINUTES 10
 #define PUMP_DURATION_SECONDS 30
 
 struct DEV_HydroponicsPump: Service::IrrigationSystem {
