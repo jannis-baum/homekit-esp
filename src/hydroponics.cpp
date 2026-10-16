@@ -8,7 +8,7 @@ void setup() {
     //   of public time servers that speak NTP (Network Time Protocol)
     // - time zone doesn't matter because we just need multiples of 15 minutes
     homeSpan.enableWebLog(10, "pool.ntp.org", "UTC0", NULL);
-    homeSpan.begin(Category::Other, "Hydroponics Controller");
+    homeSpan.begin(Category::Sprinklers, "Hydroponics");
 
     new SpanAccessory();
     new Service::AccessoryInformation();
